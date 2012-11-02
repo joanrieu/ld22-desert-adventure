@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <title>LD22 - Fififox - Desert Adventure</title>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+                <link rel="stylesheet" href="themes/DesertAdventure.min.css">
+                <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+                <script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+                <script src="jquery-ui-1.8.16.custom.min.js"></script>
+                <script>
+                        death = new Object;
+                        function buildDeathCauses() {
+                                var ul = '';
+                                for (cause in death)
+                                        ul += '<li>' + cause + '</li>';
+                                $('#deaths').find('ul')[0].innerHTML = ul;
+                        }
+                        function dieOf(cause, roomId) {
+                                if (death[cause])
+                                        return;
+                                death[cause] = true;
+                                buildDeathCauses();
+                                $('#' + roomId).find('.deathbutton').effect('pulsate');
+                        }
+                        function setupDeathTrigger(cause, roomId) {
+                                $('#' + roomId).live('pageshow', function() { dieOf(cause, roomId); });
+                        }
+                </script>
+        </head>
+        <body>
+<div data-role=page data-theme=a id=boulder-desert><div data-role=header data-theme=a><h1>Wake up!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Where am I? I don't recognize anything in here! What the hell happened to me?</p>
+<p>I suppose someone will be able to tell me where that horrible headache comes from... Let's explore the surroundings to see who lives here!</p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder-panorama">Look for people around.</a>
+<a data-role=button data-theme=a href="#boulder-clues">Look for clues of what happened. </a></div></div></div>
+<div data-role=page data-theme=a id=boulder><div data-role=header data-theme=a><h1>A cave ?</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>That boulder was farther than I thought it was... I'm exhausted now. Also, I'm really thirsty.</p>
+<p>Hey! What I could barely see from there was in fact the entrance of a cave! Maybe there's someone in this area in the end...</p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder-rest">Rest a while.</a>
+<a data-role=button data-theme=a href="#boulder-oasis">Go to the oasis nearby.</a>
+<a data-role=button data-theme=a href="#boulder-sign">Read the sign next to the door.</a>
+<a data-role=button data-theme=a href="#cave">Enter the cave.</a></div></div></div>
+<div data-role=page data-theme=a id=boulder-clues><div data-role=header data-theme=a><h1>Clues</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Apart from the dust which I'm covered with, I don't think anything's missing in my bag...</p>
+<p>Wait a minute! There's something that doesn't belong to me! It seems to be an old rusty key. I wonder why someone gave it to me.</p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder-panorama">Look for people around.</a></div></div></div>
+<div data-role=page data-theme=a id=boulder-oasis><div data-role=header data-theme=a><h1>Oasis ahead?</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I'm seeing it! I can swear it's just a little bit farther.</p>
+<p><em>It seems people easily die of dehydration in the desert.</em></p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder">That never happened...</a></div></div></div>
+<script>setupDeathTrigger("Dehydration", 'boulder-oasis');</script>
+<div data-role=page data-theme=a id=boulder-panorama><div data-role=header data-theme=a><h1>Panorama</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Whaaat? I'm lost in the desert!? I can't see anything but cactuses at the horizon!</p>
+<p>There's this large boulder though... It looks there's something next to it, which I can't really see.</p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder">Run to the boulder.</a></div></div></div>
+<div data-role=page data-theme=a id=boulder-rest><div data-role=header data-theme=a><h1>Venom</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I'm so tired... I'm falling asleep.</p>
+<p><em>I suddenly woke up, facing a rattlesnake. He had just bit me!</em></p><div data-role=controlgroup><a data-role=button data-theme=a href="#boulder">That never happened...</a></div></div></div>
+<script>setupDeathTrigger("Snake bite", 'boulder-rest');</script>
+<div data-role=page data-theme=a id=boulder-sign><div data-role=header data-theme=a><h1>Be warned!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>"<em>I used to be an adventurer like you, then I took an arrow in the knee...</em>"</p><div data-role=controlgroup><a data-role=button data-theme=a href="#cave">Enter the cave.</a></div></div></div>
+<div data-role=page data-theme=b id=cave><div data-role=header data-theme=b><h1>Stairs</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>There doesn't seem to be anybody, but still, there are candles providing light in the stairs.</p>
+<p>Down the stairs, there are two doors... I wonder which way I should go.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-iron">Open the rusty iron door.</a>
+<a data-role=button data-theme=b href="#cave-wooden">Open the wooden door.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-iron><div data-role=header data-theme=b><h1>Trapped?!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Crap! The door closed itself behind me, and it's now locked!</p>
+<p>The light coming from the fence doesn't allow me to see anything, but I can hear noise coming from the other side of the room.</p>
+<p>I don't feel secure... at all... The noise is coming closer, I'm sure someone's gonna try to attack me.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-iron-jump">Dodge by jumping to the side.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-iron-barrels><div data-role=header data-theme=b><h1>Powder</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I light up another match and bring it closer to the barrels so as to read what is written on them.</p>
+<p><em>At that time, I read "Gunpowder"... but it was already too late!</em></p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-iron-match">That didn't happen...</a></div></div></div>
+<script>setupDeathTrigger("Gunpowder explosion", 'cave-iron-barrels');</script>
+<div data-role=page data-theme=b id=cave-iron-jump><div data-role=header data-theme=b><h1>Fight</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I jump on the side, something hits the wall. There's a loud noise made by stone falling off the wall.</p>
+<p>I stay hidden in the corner. The door opens, someone, or rather something, gets out of the room, and the door gets locked again!</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-iron-match">Light up a match from my bag.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-iron-match><div data-role=header data-theme=b><h1>What's in there ?</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>There are multiple things in this room. It might be some kind of storage room.</p>
+<p>There are a few barrels against one of the walls. I just noticed that there actually is a keyhole in the door: it looks similar to the key I found earlier in my bag and which didn't belong to me.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-iron-barrels">Look at the barrels.</a>
+<a data-role=button data-theme=b href="#cave-iron-unlock">Try to unlock the door.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-iron-unlock><div data-role=header data-theme=b><h1>Stealth</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I didn't hear any door noise when the attacker left a few minutes ago, so my guess is that he went upstairs.</p>
+<p>Therefore, I can only go to the other door.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-wooden">Go to the other room through the wooden door.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-shaft-down><div data-role=header data-theme=b><h1>Water source</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>The shaft leads to an underground water source.</p>
+<p>I can see pipes going in the same direction as the river.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#river">Follow the river and the pipes.</a></div></div></div>
+<div data-role=page data-theme=b id=cave-shaft-hit><div data-role=header data-theme=b><h1>Bang!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I hit the upper part of the ladder with my foot, but it makes a huge noise.</p>
+<p><em>Before I realized it, someone had come and hit me in the back, which made me fall in the shaft.</em></p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-wooden">That never happened...</a></div></div></div>
+<script>setupDeathTrigger("Fall", 'cave-shaft-hit');</script>
+<div data-role=page data-theme=b id=cave-wooden><div data-role=header data-theme=b><h1>Shaft</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Wow, this room gives access to a shaft that goes deep down.</p>
+<p>I'm not sure if the ladder is solid enough for me to go down there.</p><div data-role=controlgroup><a data-role=button data-theme=b href="#cave-shaft-hit">Hit the shaft to check its stability.</a>
+<a data-role=button data-theme=b href="#cave-shaft-down">Try going down.</a></div></div></div>
+<div data-role=page data-theme=c id=river><div data-role=header data-theme=c><h1>Underground water pipes</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>It becomes difficult to follow the river because there isn't much space left to walk on. I see there's more space on the other side of the water. I think that going to the other side might be a good idea.</p>
+<p>The little footbridge seems to be old, though.</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-bridge">Try to cross the river.</a>
+<a data-role=button data-theme=c href="#river-side">Try to stay on this side.</a></div></div></div>
+<div data-role=page data-theme=c id=river-bridge><div data-role=header data-theme=c><h1>Footbridge</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>The footbridge's wood planks seem not to like water.</p>
+<p><em>They started breaking as I was in the middle of the bridge. I fell into the river but managed not to drown. I have been a bit carried away by the current, though.</em></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-facility">Get out of the water at a new facility.</a></div></div></div>
+<div data-role=page data-theme=c id=river-building><div data-role=header data-theme=c><h1>Chemistry</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Something in here which doesn't look very legal to me, but I am no expert...</p>
+<p>There seem to be chemical reactions going on, water being used to cool things down. There is also a big fan on one of the walls, probably bringing fresh air in this place.</p>
+<p>Oh! Someone's coming from another room!</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-ask">Ask this person where I am.</a>
+<a data-role=button data-theme=c href="#river-building-hide">Hide under a desk in front of the door.</a></div></div></div>
+<div data-role=page data-theme=c id=river-building-ask><div data-role=header data-theme=c><h1>Aim</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p><ul><li>Hi! Sorry to disturb you, I'm lost!<br>Could you help me find my way back up?</li><li>What the hell are you doin' here!</ul></p>
+<p><em>The guy took out a gun and fired it...</em></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building">That never happened.</a></div></div></div>
+<script>setupDeathTrigger("Headshot", 'river-building-ask');</script>
+<div data-role=page data-theme=c id=river-building-hide><div data-role=header data-theme=c><h1>Under the desk</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>The chemist didn't see me, but someone is opening the door!</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-throw">Throw him chemicals in the face.</a>
+<a data-role=button data-theme=c href="#river-building-run">Pull him in and run outside.</a></div></div></div>
+<div data-role=page data-theme=c id=river-building-room><div data-role=header data-theme=c><h1>Dead end</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>Oh no! This room just contains more chemicals, and the fumes got in here too. I can't breathe anymore.</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-throw">That never happened.</a></div></div></div>
+<script>setupDeathTrigger("Suffocation", 'river-building-room');</script>
+<div data-role=page data-theme=c id=river-building-run><div data-role=header data-theme=c><h1>Run away!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I jumped from under the desk, grabbed the guy by his neck and pulled him down violently.</p>
+<p>While the two men were trying to understand what had happened, I ran outside and jumped into the river, but one of the guys went out to chase me, and shot me in the leg.</p>
+<p><em>I haven't been able to reach the surface fast enough and started swallowing water...</em></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-kitten">And that's how it ends?<br><img src="http://starfruitgames.com/ld/logos/kittendare.png" alt=Kitten></a></div></div></div>
+<script>setupDeathTrigger("Drowning", 'river-building-run');</script>
+<div data-role=page data-theme=c id=river-building-throw><div data-role=header data-theme=c><h1>Chain reaction</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>The guy takes aims at me with a machine gun. I throw at his eyes some chemicals I have grabbed.</p>
+<p>He shouts and fires at the same time, some chemicals ignite in front of the chemist whose lab coat takes fire. The fire blocks the front door and reaches the fan, which explodes.</p>
+<p>I start suffocating because of the fumes. I need to escape really fast.</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-room">Reach the other room where the chemist came from.</a>
+<a data-role=button data-theme=c href="#river-building-window">Jump out the window.</a></div></div></div>
+<div data-role=page data-theme=c id=river-building-window><div data-role=header data-theme=c><h1>Bad luck</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p><em>There was a control panel behind the window which I've been empaled on.</em></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-hide">That never happened.</a></div></div></div>
+<script>setupDeathTrigger("Impalement", 'river-building-window');</script>
+<div data-role=page data-theme=c id=river-facility><div data-role=header data-theme=c><h1>Water pumping facility</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>This facility seems to pump water from the river. There's a building with shafts going into the water.</p>
+<p>The whole process makes a lot of noise.</p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building">Walk inside the building.</a></div></div></div>
+<div data-role=page data-theme=c id=river-kitten><div data-role=header data-theme=c><h1>Furry friend</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p>I feel water surrounding me. I feel something touching my cheek.</p>
+<p>I open an eye and close it again, it's the morning already: I feel the rough tongue of my cat licking my face to wake me up! What a wonderful moment!</p>
+<p><em>When you have a cat, you never feel alone because you never are! &lt;3</em></p>
+<p><div style="text-align: center;"><iframe width="420" height="315" src="http://www.youtube.com/embed/QH2-TGUlwu4?rel=0" frameborder="0" allowfullscreen></iframe></div></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-building-hide">In the end, the drowning never happened!</a>
+<a data-role=button data-theme=c href="#boulder-desert">In fact, nothing happened at all!</a></div></div></div>
+<div data-role=page data-theme=c id=river-side><div data-role=header data-theme=c><h1>Swim!</h1><a data-icon=star data-rel=dialog class="ui-btn-right deathbutton" href="#deaths">Deaths</a></div><div data-role=content><p><em>In the end, there was not enough space for me to walk, and I've been forced to swim, but I've been carried away by the current a little bit.</em></p><div data-role=controlgroup><a data-role=button data-theme=c href="#river-facility">Get out of the water at a new facility.</a></div></div></div>
+                <div data-role=page id=deaths>
+                        <div data-role=header>
+                                <h1>Deaths</h1>
+                        </div>
+                        <div data-role=content>
+                                <ul>
+                                </ul>
+                        </div>
+                </div>
+        </body>
+</html>
